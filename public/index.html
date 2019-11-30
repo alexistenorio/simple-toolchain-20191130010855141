@@ -1,24 +1,141 @@
 <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
-  <head>
-    <title>Hello World</title>
+<head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="stylesheets/style.css">
-  </head>
+    <title>Métodos Numéricos I</title>
 
-  <body>
-    <table>
-      <tr>
-        <td style= "width:30%;">
-          <img class = "newappIcon" src="images/newapp-icon.png">
-        </td>
-        <td>
-          <h1>Hello world!</h1>
-        </td>
-      </tr>
-    </table>
-  </body>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Integrantes.</h1>
+        Cruz Mendoza Jesús Antonio <br>
+		Hernández Gómez Guadalupe Victoria <br>
+		Oros López Andrés <br>
+		Tenorio Lugo Brandon Alexis <br>
+    </div>
+	<div class="container">
+        <h1>Método de biscección.</h1>
+		i: Contador principal. <br>
+		ite: Número de iteraciones máximas. <br>
+		a, b, c: Variables tipo doble. <br>
+		fa: Función evaluada en a. <br>
+		fb: Función evaluada en b. <br>
+		fc: Función evaluada en c. <br>
+		err: Error absoluto calculado. <br>
+		errLim: Error absoluto mínimo. <br>
+		ValorAnterior: Valor de c en la última iteración. <br>
+		Suponga la función f(x) = sen(x) + 3cos(x) <br><br>
+		Código en Java: <br><br>
+        for (i = 0; i < ite; i++) { <br>
+            fa = Math.sin(a) + 3 * Math.cos(a); <br>
+            fb = Math.sin(b) + 3 * Math.cos(b); <br>
+            c = (a + b) / 2; <br>
+            fc = Math.sin(c) + 3 * Math.cos(c); <br>
+            if (Math.signum(fc) == Math.signum(fa)) { <br>
+                a = c; <br>
+            } else { <br>
+                b = c; <br>
+            } <br>
+            if (i != 0) { <br>
+                err = Math.abs(c - ValorAnterior); <br>
+                if(err <= errLim) { <br>
+                    break; <br>
+                } <br>
+            } else { <br>
+                tblDatos.setValueAt(null, i, 6); <br>
+            } <br>
+			ValorAnterior = c; <br>
+        } <br>
+    </div>
+	<div class="container">
+        <h1>Método de Gauss.</h1>
+		A: Matríz de nxn. <br>
+		i, j, k, l: Contadores. <br>
+		n: Tamaño de la matriz. <br>
+		aux: Variable doble auxiliar. <br>
+		signo: Variable que guarda el signo del elemento a eliminar. <br>
+		signoAux: Variable que guarda el signo del elemento pivote. <br>
+		Código en Java: <br><br>
+        for (int j = 0; j < n; j++) { <br>
+                if (A[j][j] == 0D) {<br>
+                    if (j < n - 1) {<br>
+                        for (int k = j + 1; k < n; k++) {<br>
+                            if (A[k][j] != 0) {<br>
+                                for (int l = 0; l < n + 1; l++) {<br>
+                                    aux = A[j][l];<br>
+                                    A[j][l] = A[k][l];<br>
+                                    A[k][l] = aux;<br>
+                                }<br>
+                                break;<br>
+                            }<br>
+                        }<br>
+                    }<br>
+                }<br>
+                for (int i = j + 1; i < n; i++) {<br>
+                    signo = Math.signum(A[i][j]); <br>
+                    signoAux = Math.signum(A[j][j]);<br>
+                    aux = Math.abs(A[i][j]);<br>
+                    if (signo == 1.0D && signoAux == 1.0D) {<br>
+                        for (int k = j; k < n + 1; k++) {<br>
+                            A[i][k] = A[i][k] - (aux / Math.abs(A[j][j])) * A[j][k];<br>
+                        }<br>
+                    } else if (signo == 1.0D && signoAux == -1.0D) {<br>
+                        for (int k = j; k < n + 1; k++) {<br>
+                            A[i][k] = A[i][k] + (aux / Math.abs(A[j][j])) * A[j][k];<br>
+                        }<br>
+                    } else if (signo == -1.0D && signoAux == 1.0D) {<br>
+                        for (int k = j; k < n + 1; k++) {<br>
+                            A[i][k] = A[i][k] + (aux / Math.abs(A[j][j])) * A[j][k];<br>
+                        }<br>
+                    } else if (signo == -1.0D && signoAux == -1.0D) {<br>
+                        for (int k = j; k < n + 1; k++) {<br>
+                            A[i][k] = A[i][k] - (aux / Math.abs(A[j][j])) * A[j][k];<br>
+                        }<br>
+                    }<br>
+                }<br>
+            }<br>
+    </div>
+	<div class="container">
+        <h1>Método de Falsa Posición.</h1>
+		i: Contador principal. <br>
+		ite: Número de iteraciones máximas. <br>
+		a, b, c: Variables tipo doble. <br>
+		fa: Función evaluada en a. <br>
+		fb: Función evaluada en b. <br>
+		fc: Función evaluada en c. <br>
+		err: Error absoluto calculado. <br>
+		errLim: Error absoluto mínimo. <br>
+		ValorAnterior: Valor de c en la última iteración. <br>
+		Suponga la función f(x) = x^2 - 5x + 2 <br><br>
+		Código en Java: <br><br>
+        for (int i = 0; i < ite; i++) { <br>
+                fa = (Math.pow(a, 2) - (5 * a) + 2) / 2;<br>
+                fb = (Math.pow(b, 2) - (5 * b) + 2) / 2;<br>
+                c = b - (((fb * (a - b))) / (fa - fb));<br>
+                fc = (Math.pow(c, 2) - (5 * c) + 2) / 2;<br>
+                if (Math.signum(fc) == Math.signum(fa)) {<br>
+                    a = c;<br>
+                } else {<br>
+                    b = c;<br>
+                }<br>
+                if (i != 0) {<br>
+                    err = Math.abs(c - (Double) tblDatos.getValueAt(i - 1, 4));<br>
+                    if (err <= errLim) {<br>
+                        break;<br>
+                    }<br>
+                }
+				ValorAnterior = c; <br>
+            }<br>
+    </div>
+</body>
 
 </html>
+
